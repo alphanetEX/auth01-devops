@@ -9,6 +9,7 @@ EOM
 
 docker compose up -d
 
+sleep 10s
 
 docker exec -it mongo1 mongosh --port 30001 --eval '
 rs.initiate(
