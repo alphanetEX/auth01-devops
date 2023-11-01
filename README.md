@@ -14,6 +14,15 @@ enviar el contenido a la Cloud Vm via Github
     docker compose build --no-cache 
     docker compose up -d 
 ```
+
+- Ejecutar el proyecto sin Escalamiento  
+
+````non-scalabe
+    cd k8s/
+    chmod 750 start.sh 
+    ./start.sh
+```
+
 - para acceder a a los contenedores  
 
 ```
@@ -24,3 +33,4 @@ enviar el contenido a la Cloud Vm via Github
     #remote acces with mongodb Compass
     
 ```
+
