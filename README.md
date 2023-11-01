@@ -17,7 +17,7 @@ enviar el contenido a la Cloud Vm via Github
 
 - Ejecutar el proyecto sin Escalamiento  
 
-````non-scalabe
+````sh
     cd k8s/
     chmod 750 start.sh 
     ./start.sh
@@ -25,7 +25,7 @@ enviar el contenido a la Cloud Vm via Github
 
 - para acceder a a los contenedores  
 
-```
+```sh
     #acces with mongosh 
     docker exec -it mongo1 sh -c "mongosh --port 30001"
     #remote acces with DNS 
