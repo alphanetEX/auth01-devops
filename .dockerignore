@@ -1,0 +1,12 @@
+cache/
+hardrive/
+node0/
+node1/
+node2/
+.vagrant/
+Dockerfile
+.dockerignore
+.gitignore 
+.git
+Vagrantfile
+root.sh

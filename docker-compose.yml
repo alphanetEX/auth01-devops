@@ -1,0 +1,56 @@
+version: "3.5" 
+services:
+  db-wrk:
+    build: .
+    
+    image: mgnd-worker
+    environment:
+      alphabet: "sfdsd"
+    ports:
+      - "27012-27013:27012"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    stdin_open: true
+    tty: true 
+    networks: 
+      db-authnet:
+        #ipv4_address: 10.4.0.2
+    deploy:
+      mode: replicated
+      replicas: 2
+    command: bash d04-workers.sh
+
+  db-main:
+    build: .
+    image: mgnd-main
+    container_name: mongoc_0
+    environment:
+      alphabet: "sfdsd"
+    ports:
+      - "27011:27011"
+    volumes:
+      - ./node0/:/data/db/
+      - /var/run/docker.sock:/var/run/docker.sock
+    stdin_open: true
+    tty: true 
+    networks: 
+      db-authnet:
+        #ipv4_address: 10.4.0.4
+    depends_on: 
+      - db-wrk
+    command: bash d03-main.sh
+   # restart_policy: 
+    #    condition: always | unless-stopped | on-failure 
+        
+networks: 
+  db-authnet:
+    driver: bridge 
+    ipam:
+      driver: default
+      config: 
+        - subnet: 10.0.1.0/27
+volumes:
+  db-data:
+
+
+        

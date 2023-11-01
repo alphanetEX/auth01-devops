@@ -1,0 +1,100 @@
+use auth01;
+
+//pather tables 
+db.tipos_usuario.insertOne({
+    tipo_usuario:"alquiler", 
+    privilegio:"b4020e2"
+})
+
+db.proyectos.insertMany([
+    { nombre_proyecto: "Torres 105",apartamentos: 18, ubicacion: "unknown", zona_compartida: 1 },
+    { nombre_proyecto: "Torre 91", apartamentos: 12, ubicacion: "unknown", zona_compartida:1 },
+    { nombre_proyecto: "Vista Azul", apartamentos: 10, ubicacion: "unknown", zona_compartida:1 }
+ ]);
+
+
+ //change to use in Embebed document 
+db.tipo_telefonos.insertOne({
+    tipo: "casa"
+})
+
+db.cargos.insertOne({
+    nombre_cargo:"Administrador", 
+    fecha_creacion:null
+})
+
+db.formas_pago.insertOne({
+    forma_pago:"bitcoint" 
+})
+
+//ralatinal (collections) tables  non added in databae
+
+db.usuarios.insertOne({
+    id_tipo:"code of if father",
+    nombre:"John",
+    apellido:"Doe",
+    fecha_nacimiento:"1985-11-12",
+    foto:"dev/null", 
+    dui: 02221111, 
+    usuario: "jn123", 
+    email:"test@aws.com", 
+    contrasenia:"12o332ok4", 
+    caducidad: "2021-12-2"
+    status: 1, 
+    fecha_creacion: "2019-4-6"
+})
+
+//done
+db.documentos.insertOne({
+    documento:"/dev/null",
+    fecha_subida:"2019-12-12"
+})
+
+db.apartamentos.InsertOne({
+    id_proyecto:"code of if father",
+    id_usuario:"code of if father",
+    n_propiedad: "t-2040",
+    n_habitantes: 4, 
+    habilitado: true, 
+    t_habilitado: "2024-10-12" 
+})
+
+db.estado_cuentas.insertOne({
+    id_apartamento:"code of if father",
+    id_pago:"code of if father",
+    numero: 1422, 
+    tipo_cobro:"expensas", 
+    valor_cancelado: 60.20, 
+    numero_recibo:342, 
+    fecha_creacion:"2019-6-4"
+})
+
+db.telefono_usuarios.insertOne({
+    id_usuario:"code of if father", 
+    id_tipo_tel:"code of if father", 
+    telefono: 87654321
+   
+})
+
+//usen embebed documents 
+id_tipo_tel:[
+    {   
+        id: "",
+        tipo: "casa"
+    }
+], 
+
+db.directivas.insertOne({
+    id_proyecto: "code of if father",
+    id_usuario: "code of if father",
+    id_cargo: "code of if father"
+})
+
+//usung embebed document 
+cargos:[
+    {   
+        id: "",
+        nombre_cargo: "casa",
+        fecha_creacion: null
+    }
+], 

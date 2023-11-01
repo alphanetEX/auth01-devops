@@ -1,0 +1,102 @@
+use auth01
+//-------------INSERCION DE DATOS 
+db.tipos_usuario.insertOne(
+   {                           //_id:"soy un id"
+    tipo_usuario:"alquiler",
+    privilegio:"b3040E2"}
+)
+
+db.tipos_usuario.insertOne(
+   {tipo_usuario:"administrador", 
+    privilegio:"b3052E20"});
+
+db.inventory.insertMany( [
+   { item: "canvas", qty: 100, size: { h: 28, w: 35.5, uom: "cm" }, status: "A" },
+   { item: "journal", qty: 25, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+   { item: "mat", qty: 85, size: { h: 27.9, w: 35.5, uom: "cm" }, status: "A" },
+   { item: "mousepad", qty: 25, size: { h: 19, w: 22.85, uom: "cm" }, status: "P" },
+   { item: "notebook", qty: 50, size: { h: 8.5, w: 11, uom: "in" }, status: "P" },
+   { item: "paper", qty: 100, size: { h: 8.5, w: 11, uom: "in" }, status: "D" },
+   { item: "planner", qty: 75, size: { h: 22.85, w: 30, uom: "cm" }, status: "D" },
+   { item: "postcard", qty: 45, size: { h: 10, w: 15.25, uom: "cm" }, status: "A" },
+   { item: "sketchbook", qty: 80, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+   { item: "sketch pad", qty: 95, size: { h: 22.85, w: 30.5, uom: "cm" }, status: "A" }
+] )
+
+db.proyectos.insertMany([
+   { nombre_proyecto: "Torres 105",apartamentos: 18, ubicacion: "unknown", zona_compartida: 1 },
+   { nombre_proyecto: "Torre 91", apartamentos: 12, ubicacion: "unknown", zona_compartida:1 },
+   { nombre_proyecto: "Vista Azul", apartamentos: 10, ubicacion: "unknown", zona_compartida:1 }
+]);
+
+
+//------------------------CONSULTA DE DATOS---------- 
+db.proyectos.find({zona_compartida: 1}).pretty(); //buscar en la coleccion proyectos los campos cuya zona compartida sea 1
+db.proyectos.find({zona_compartida: 1}).count(); //contar los campos cuya zona_compartida sea =1; 
+db.proyectos.findOne({_id: ObjectId("5cfd0629141d6ad014185304")}); //bucar un campo por su id 
+
+
+db.proyectos.findOne({_
+   id: ObjectId("5cfd0629141d6ad014185304"), 
+   apartamentos:{$lte: 10}});
+
+   //$lte: 10 
+
+// Condición OR con operador
+db.inventory.find( { $or: [ { status: "A" }, { qty: { $lt: 30 } } ] } )
+
+//Trae el primer documento que cumpla con el filtro de acuerdo al orden natural en que los documentos se encuentren guardados en disco
+db.inventory.findOne( { status: "A", qty: { $lt: 30 } } )
+
+
+//------------------------ACTUALIZACION DE DATOS--------------------
+
+// actualizar un solo campo por id 
+db.tipos_usuario.updateOne(
+  {_id: ObjectId("5cfc7630141d6ad014185303")}, 
+  {$set: { tipo_usuario:"empleado"}});
+
+ //actualizar multiples campos  
+  db.tipos_usuario.update(
+   {$set: { tipo_usuario:"empleado"}});
+
+db.proyectos.updateOne(
+ {_id : ObjectId("5cfd0629141d6ad014185304")},
+ {$set: { nombre_proyecto:"Torres 105",
+         apartamentos: 19, 
+         ubicacion: "calle dos que tres",
+         zona_compartida: 1} });
+
+
+//------------------------OPERACIONES DE ELIMINACION----------------
+
+//eliminacion uno por uno con  un string de filtro 
+db.tipos_usuario.deleteOne(
+  {tipo_usuario : "administrador"}
+)
+//eliminacion parcial de campos con un string de filtro 
+db.tipos_usuario.deleteMany(
+ {tipo_usuario : "administrador"}
+)
+//eliminacion por un id 
+db.tipos_usuario.deleteOne(
+  {_id: ObjectId("5cfd1d1d141d6ad014185307")}
+)
+
+//eliminacion parcial de campos 
+db.tipos_usuario.deleteMany({}); 
+
+
+db.createUser(
+  {
+    user: "alphanetex",
+    pwd: "netalphabeta",
+    roles: [
+       { role: "readWrite", db: "auth01" }
+    ]
+  }
+)
+
+
+
+
