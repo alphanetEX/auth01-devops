@@ -48,9 +48,9 @@ if [[ $boolean = true ]]; then
   echo ""
 else
 
+mongo admin --port 27011 --eval 'rs.initiate()'
 
-
-sleep 4s
+sleep 16s
 
 mongo admin --host localhost:27011 --eval '
   db.createUser({
@@ -61,20 +61,18 @@ mongo admin --host localhost:27011 --eval '
     ]
   });'
 
-mongo admin --port 27011 --eval 'rs.initiate()'
 
-
-sleep 15s
+sleep 20s
 
 #convert has function block
 mongo --host "auth01-beta/$dns:$port" -u "alphanetEX" -p "vtirhashco" --authenticationDatabase "admin" --eval "rs.add('auth01-devops-db-wrk-1:27013');"
 
-sleep 15s
+sleep 20s
 mongo --host "auth01-beta/$dns:$port" -u "alphanetEX" -p "vtirhashco" --authenticationDatabase "admin" --eval "rs.add('auth01-devops-db-wrk-2:27012');"
 
 fi
 
-sleep 15s
+sleep 20s
 
 mongo --host "auth01-beta/$dns:$port" -u "alphanetEX" -p "vtirhashco" \
 --authenticationDatabase "admin"
